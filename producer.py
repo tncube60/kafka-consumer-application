@@ -13,6 +13,7 @@ def delivery_report(err, msg):
         print(f"❌ Delivery failed: {err}")
     else:
         print(f"✅ Delivery succeeded {msg.value().decode("utf-8")}")
+        print(f"✅ Delivered to {msg.topic()}: partition {msg.partition()}: at offset {msg.offset()}")
 
 
 order = {
