@@ -1,3 +1,4 @@
+import datetime
 import uuid
 import json
 from confluent_kafka import Producer
@@ -18,9 +19,9 @@ def delivery_report(err, msg):
 
 order = {
     "order_id": str(uuid.uuid4()),
-    "user": "william",
-    "item": "mushroom pizza",
-    "quantity": 2
+    "user": "Lara",
+    "item": "Vanilla cone",
+    "quantity": 1
 }
 
 value = json.dumps(order).encode("utf-8")

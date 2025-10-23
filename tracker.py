@@ -13,13 +13,18 @@ consumer.subscribe(["orders"])
 
 print("🟢 Consumer is running and subscribed to orders topic")
 
-while True:
-    msg = consumer.poll(1.0)
-    if msg is None:
-        continue
-    if msg.error():
-        print(f"❌ Consumer error: {msg.error()}")
+try:
+    while True:
+        msg = consumer.poll(1.0)
+        if msg is None:
+            continue
+        if msg.error():
+            print(f"❌ Consumer error: {msg.error()}")
 
-    value = msg.value().decode("utf-8")
-    order = json.loads(value)
-    print(f"📦 Received order: {order['quantity']} x {order['item']} from {order['user']}")
+        value = msg.value().decode("utf-8")
+        order = json.loads(value)
+        print(f"📦 Received order: {order['quantity']} x {order['item']} from {order['user']}")
+except KeyboardInterrupt:
+    print("\n🔴 Stopping consumer")
+finally:
+    consumer.close()
